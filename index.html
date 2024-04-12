@@ -1,1 +1,34 @@
-Hello World!
+<html>
+  <body style="background-color: black">
+    <center>
+      <textarea id="message" style="text-align: center; width: 50%; height: 10%; margin: 10px">Message...</textarea>
+      <br />
+      <button id="sos" style="width: 50%; height: 10%; margin: 10px">Send SOS!</button>
+    </center>
+
+    <script>
+      const textarea = document.getElementById("message");
+      const button = document.getElementById("sos");
+
+      button.addEventListener("click", async (_) => {
+        try {
+          const response = await fetch(
+            "https://ntfy.sh/faeChel7Au3ieGaenai9bu6Ahghahthi",
+            {
+              method: "POST",
+              body: textarea.value,
+              headers: {
+                Title: "SOS Alert!",
+                Priority: "urgent",
+                Tags: "warning",
+              },
+            }
+          );
+          console.log("Completed!", response);
+        } catch (err) {
+          console.error(`Error: ${err}`);
+        }
+      });
+    </script>
+  </body>
+</html>
